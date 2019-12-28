@@ -13,7 +13,11 @@ var client = new Twit({
 //route to save a hashtag
 routes.post('/saveHashtag', tweetsController.store);
 
+//route to get the hashtags
 routes.get('/getHashtags', tweetsController.index);
+
+//route to delete a hashtag
+routes.delete('/delete/:id', tweetsController.destroy);
 
 //route to find tweets by hastags.
 routes.get('/getTweets', (req, resp) => {

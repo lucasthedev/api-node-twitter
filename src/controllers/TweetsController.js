@@ -13,5 +13,11 @@ module.exports = {
         const hashtag = await Hashtag.create(req.body);
 
         return res.json(hashtag);
+    },
+
+    async destroy(req, res){
+        await Hashtag.findByIdAndRemove(req.params.id);
+
+        return res.send();
     }
 };
