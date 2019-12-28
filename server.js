@@ -5,6 +5,8 @@ const requireDir = require('require-dir');
 //initializing the app.
 const app = express();
 
+app.use(express.json());
+
 //DB conect
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);

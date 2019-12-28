@@ -8,4 +8,10 @@ module.exports = {
 
         return res.json(hashtags);
     },
+
+    async store(req, res){
+        const hashtag = await Hashtag.create(req.body);
+
+        return res.json(hashtag);
+    }
 };

@@ -11,9 +11,7 @@ var client = new Twit({
 });
 
 //route to save a hashtag
-routes.post('/saveHashtag', (req, resp) => {
-    hasgtag.create({ hashtag: '#2020' });
-});
+routes.post('/saveHashtag', tweetsController.store);
 
 routes.get('/getHashtags', tweetsController.index);
 
