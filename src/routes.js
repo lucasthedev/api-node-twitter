@@ -20,11 +20,16 @@ routes.get('/getHashtags', tweetsController.index);
 routes.delete('/delete/:id', tweetsController.destroy);
 
 //route to find tweets by hastags.
-routes.get('/getTweets', (req, resp) => {
+routes.post('/getTweets', (req, resp) => {
+    var returnHashtags = req.body;
 
-    let hashTagsList = ['#lucas', '#brasil'];
+    let listHashtags = [];
+    
+    for(let i = 0; i < returnHashtags.length; i++){
+        listHashtags.push(returnHashtags[i].hashtag);
+    }
 
-    client.get('search/tweets', {q: hashTagsList, count: 3}, function(err, data, response){
+    client.get('search/tweets', {q: listHashtags, count: 200}, function(err, data, response){
         resp.send(data);
     })
 });
