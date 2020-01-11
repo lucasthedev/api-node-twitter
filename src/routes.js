@@ -22,15 +22,27 @@ routes.delete('/delete/:id', tweetsController.destroy);
 //route to find tweets by hastags.
 routes.post('/getTweets', (req, resp) => {
     var returnHashtags = req.body;
+    console.log(returnHashtags);
+    console.log(JSON.stringify(returnHashtags));
+    var listHashtags = [];
 
-    let listHashtags = [];
-    
     for(let i = 0; i < returnHashtags.length; i++){
         listHashtags.push(returnHashtags[i].hashtag);
     }
 
-    client.get('search/tweets', {q: listHashtags, count: 200}, function(err, data, response){
-        resp.send(data);
+    console.log(listHashtags);
+
+    //teste com este end-point, porém ao enviar mais de 2 hashtags, não retorna nada.
+    
+    /*client.get('search/tweets', {q: listHashtags, count: 40}, function(err, data, response){
+        return resp.send(data);
+    })*/
+
+    
+    var stream = client.stream('statuses/filter', { track: listHashtags })
+
+    stream.on('tweet', function (tweet) {
+        console.log(tweet);
     })
 });
 
